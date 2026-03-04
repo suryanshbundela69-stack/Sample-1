@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Mind Classes - Master Mind Builds Master of World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #1a1a2e;
+            --accent-color: #7c3aed;
+            --light-blue: #3b82f6;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --border-light: #e5e7eb;
+            --success: #10b981;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ==================== NAVBAR ==================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-family: 'Aleo', serif;
+            font-size: 20px;
+            color: var(--primary-color);
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .logo-text p {
+            font-size: 11px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            margin: 5px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            margin-top: 80px;
+            height: 600px;
+            background: linear-gradient(rgba(30, 58, 138, 0.75), rgba(26, 26, 46, 0.75)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231e3a8a" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.1), transparent),
+                        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1), transparent);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Aleo', serif;
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero .tagline {
+            font-size: 24px;
+            color: #fbbf24;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 2px 10px rgba(251, 191, 36, 0.4); }
+            50% { text-shadow: 0 2px 30px rgba(251, 191, 36, 0.8); }
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(251, 191, 36, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 14px 40px;
+            border: 2px solid white;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== GENERAL SECTIONS ==================== */
+        section {
+            padding: 80px 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-family: 'Aleo', serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-align: center;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--light-blue));
+            border-radius: 2px;
+        }
+
+        /* ==================== ABOUT SECTION ==================== */
+        .about {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-text h3 {
+            font-family: 'Aleo', serif;
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.15);
+        }
+
+        .stat-number {
+            font-family: 'Aleo', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .feature-item i {
+            color: var(--accent-color);
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .feature-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ==================== TEAM SECTION ==================== */
+        .team {
+            background: white;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(124, 58, 237, 0.2);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .team-card:hover .team-image img {
+            transform: scale(1.05);
+        }
+
+        .team-info {
+            padding: 2rem;
+        }
+
+        .team-info h3 {
+            font-family: 'Aleo', serif;
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-info .role {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-info p {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ==================== ACHIEVERS SECTION ==================== */
+        .achievers {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+        }
+
+        .achievers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .achiever-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .achiever-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(124, 58, 237, 0.2);
+        }
+
+        .achiever-header {
+            display: flex;
+            gap: 1.5rem;
+            padding: 2rem;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .achiever-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .achiever-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .achiever-info h3 {
+            font-family: 'Aleo', serif;
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .achiever-info .achievement {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .achiever-body {
+            padding: 2rem;
+        }
+
+        .testimonial {
+            color: var(--text-light);
+            font-style: italic;
+            line-height: 1.8;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* ==================== FEES & TIMING SECTION ==================== */
+        .fees {
+            background: white;
+        }
+
+        .fees-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .fees-table {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .fees-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .fees-table th {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .fees-table td {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .fees-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .fees-table tr:hover {
+            background: white;
+        }
+
+        .timing-section h3 {
+            font-family: 'Aleo', serif;
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .timing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .timing-item {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timing-item strong {
+            font-size: 18px;
+        }
+
+        /* ==================== CONTACT SECTION ==================== */
+        .contact {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.15);
+        }
+
+        .contact-box i {
+            font-size: 48px;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-box h3 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-box p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .contact-box a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* ==================== TESTIMONIALS SECTION ==================== */
+        .testimonials {
+            background: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.1);
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* ==================== COURSES PANEL ==================== */
+        .courses {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.2);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-content h3 {
+            font-family: 'Aleo', serif;
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .course-content p {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 1rem;
+        }
+
+        .course-price {
+            font-size: 24px;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .course-action {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .course-action button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-cart {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--primary-color);
+        }
+
+        .btn-buy-now {
+            background: var(--light-blue);
+            color: white;
+        }
+
+        .btn-buy-now:hover {
+            background: var(--primary-color);
+        }
+
+        /* ==================== CATEGORY PANEL ==================== */
+        .categories {
+            background: white;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, white, #f8fafc);
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--accent-color), var(--light-blue));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.2);
+        }
+
+        .category-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            font-family: 'Aleo', serif;
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .category-card p {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .category-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-section p {
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: #999;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                padding: 1rem 0;
+            }
+
+            .hero {
+                height: 400px;
+                margin-top: 60px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero .tagline {
+                font-size: 18px;
+            }
+
+            section {
+                padding: 50px 1rem;
+            }
+
+            section h2 {
+                font-size: 36px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achievers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fees-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+        }
+
+        /* ==================== MODAL STYLES ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            overflow: auto;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: var(--text-light);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--accent-color);
+        }
+
+        .modal h2 {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        }
+
+        /* ==================== UTILITIES ==================== */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">M</div>
+                <div class="logo-text">
+                    <h1>Master Mind</h1>
+                    <p>Classes</p>
+                </div>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#achievers">Achievers</a></li>
+                <li><a href="#fees">Fees</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cta-button" onclick="openAdmissionModal()">Apply Now</button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Master Mind Classes</h1>
+            <p class="tagline">Master Mind Builds Master of World</p>
+            <p>Premier coaching for academic excellence and competitive exam success</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="openAdmissionModal()">Start Your Journey</button>
+                <button class="btn-secondary" onclick="document.querySelector('#about').scrollIntoView()">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section class="about" id="about">
+        <h2>About Master Mind Classes</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Excellence in Education</h3>
+                <p>Master Mind Classes has been a beacon of academic excellence for over 5 years, transforming thousands of students into achievers. We are committed to providing world-class education with personalized attention and innovative teaching methodologies.</p>
+                <p>Our state-of-the-art facilities, experienced faculty, and comprehensive curriculum ensure that every student reaches their full potential.</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <i class="fas fa-chalkboard-user"></i>
+                        <div>
+                            <h4>Expert Faculty</h4>
+                            <p>Highly qualified and experienced teachers</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-laptop"></i>
+                        <div>
+                            <h4>Digital Classes</h4>
+                            <p>Interactive online learning platform</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <h4>Quality Notes</h4>
+                            <p>Comprehensive and specialized study materials</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <h4>Proven Track Record</h4>
+                            <p>97% success rate across all streams</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-number">97%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">300+</div>
+                        <div class="stat-label">Students Taught</div>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem; padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+                    <h4 style="color: var(--primary-color); margin-bottom: 1rem; font-family: 'Aleo', serif;">Our Facilities</h4>
+                    <ul style="color: var(--text-light); line-height: 2;">
+                        <li>✓ Doubt clearing classes</li>
+                        <li>✓ Digital learning platform</li>
+                        <li>✓ Weekly examination</li>
+                        <li>✓ Specialized study notes</li>
+                        <li>✓ Library facilities</li>
+                        <li>✓ Career guidance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TEAM SECTION ==================== -->
+    <section class="team" id="team">
+        <h2>Our Expert Faculty</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%231e3a8a' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='60' fill='white' text-anchor='middle' dy='.3em'%3ESuryansh%3C/text%3E%3C/svg%3E" alt="Suryansh Sir">
+                </div>
+                <div class="team-info">
+                    <h3>Suryansh Sir</h3>
+                    <p class="role">Director of Institution</p>
+                    <p>Expert in Accountancy and English. With visionary leadership, Suryansh Sir has built Master Mind Classes into a premier educational institution.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%237c3aed' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='50' fill='white' text-anchor='middle' dy='.3em'%3EDevansh%3C/text%3E%3C/svg%3E" alt="Devansh Sir">
+                </div>
+                <div class="team-info">
+                    <h3>Devansh Sir</h3>
+                    <p class="role">Wise Incharge</p>
+                    <p>Specializes in Business Studies and Economics. Known for making complex concepts simple and engaging for students.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%233b82f6' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='50' fill='white' text-anchor='middle' dy='.3em'%3EDhruv%3C/text%3E%3C/svg%3E" alt="Dhruv Sir">
+                </div>
+                <div class="team-info">
+                    <h3>Dhruv Sir</h3>
+                    <p class="role">Mathematics Expert</p>
+                    <p>Makes Mathematics and Physics easy to understand. His innovative teaching methods have helped countless students master these subjects.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%2310b981' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='40' fill='white' text-anchor='middle' dy='.3em'%3EHimanshu%3C/text%3E%3C/svg%3E" alt="Himanshu Sir">
+                </div>
+                <div class="team-info">
+                    <h3>Himanshu Sir</h3>
+                    <p class="role">Science Specialist</p>
+                    <p>Teaches Chemistry and Biology with real experiments. Brings laboratory experience directly to the classroom for practical learning.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23f59e0b' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='50' fill='white' text-anchor='middle' dy='.3em'%3EShiva%3C/text%3E%3C/svg%3E" alt="Shiva Sir">
+                </div>
+                <div class="team-info">
+                    <h3>Shiva Sir</h3>
+                    <p class="role">Class 9 & 10 Incharge</p>
+                    <p>Oversees foundation programs for classes 9 and 10, ensuring strong conceptual building for advanced studies.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%238b5cf6' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='40' fill='white' text-anchor='middle' dy='.3em'%3ERajdeep%3C/text%3E%3C/svg%3E" alt="Rajdeep Sir">
+                </div>
+                <div class="team-info">
+                    <h3>Rajdeep Sir</h3>
+                    <p class="role">Computer Master Mind</p>
+                    <p>Expert in Computer Science and IT. Provides cutting-edge knowledge for digital literacy and programming skills.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ACHIEVERS SECTION ==================== -->
+    <section class="achievers" id="achievers">
+        <h2>Our Brilliant Master Minds</h2>
+        <div class="achievers-grid">
+            <div class="achiever-card">
+                <div class="achiever-header">
+                    <div class="achiever-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%231e3a8a' width='100' height='100'/%3E%3Ctext x='50%25' y='50%25' font-size='30' fill='white' text-anchor='middle' dy='.3em'%3EDG%3C/text%3E%3C/svg%3E" alt="Devansh Gupta">
+                    </div>
+                    <div class="achiever-info">
+                        <h3>Devansh Gupta</h3>
+                        <p class="achievement">Commerce Topper</p>
+                    </div>
+                </div>
+                <div class="achiever-body">
+                    <p style="margin-bottom: 1rem; color: var(--accent-color); font-weight: 600;">District Topper of Jhansi in Commerce (2026)</p>
+                    <p class="testimonial">"Master Mind Classes provided me with exceptional guidance and resources. The personalized attention and expert faculty made all the difference in my success."</p>
+                </div>
+            </div>
+
+            <div class="achiever-card">
+                <div class="achiever-header">
+                    <div class="achiever-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%237c3aed' width='100' height='100'/%3E%3Ctext x='50%25' y='50%25' font-size='30' fill='white' text-anchor='middle' dy='.3em'%3EHG%3C/text%3E%3C/svg%3E" alt="Himanshu Gupta">
+                    </div>
+                    <div class="achiever-info">
+                        <h3>Himanshu Gupta</h3>
+                        <p class="achievement">CA Foundation Success</p>
+                    </div>
+                </div>
+                <div class="achiever-body">
+                    <p style="margin-bottom: 1rem; color: var(--accent-color); font-weight: 600;">Cleared CA Foundation in First Attempt</p>
+                    <p class="testimonial">"The foundation classes at Master Mind Classes prepared me exceptionally well. Clear concepts and dedicated mentorship made the journey smooth."</p>
+                </div>
+            </div>
+
+            <div class="achiever-card">
+                <div class="achiever-header">
+                    <div class="achiever-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%233b82f6' width='100' height='100'/%3E%3Ctext x='50%25' y='50%25' font-size='30' fill='white' text-anchor='middle' dy='.3em'%3EDR%3C/text%3E%3C/svg%3E" alt="Dhruv Rathore">
+                    </div>
+                    <div class="achiever-info">
+                        <h3>Dhruv Rathore</h3>
+                        <p class="achievement">JEE Mains Success</p>
+                    </div>
+                </div>
+                <div class="achiever-body">
+                    <p style="margin-bottom: 1rem; color: var(--accent-color); font-weight: 600;">Cleared JEE Mains with Excellent Score</p>
+                    <p class="testimonial">"Master Mind Classes provided comprehensive coaching with regular mock tests and doubt sessions. This definitely accelerated my success."</p>
+                </div>
+            </div>
+
+            <div class="achiever-card">
+                <div class="achiever-header">
+                    <div class="achiever-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%2310b981' width='100' height='100'/%3E%3Ctext x='50%25' y='50%25' font-size='30' fill='white' text-anchor='middle' dy='.3em'%3ESR%3C/text%3E%3C/svg%3E" alt="Simran Rathore">
+                    </div>
+                    <div class="achiever-info">
+                        <h3>Simran Rathore</h3>
+                        <p class="achievement">NDA Success</p>
+                    </div>
+                </div>
+                <div class="achiever-body">
+                    <p style="margin-bottom: 1rem; color: var(--accent-color); font-weight: 600;">Cleared National Defence Academy Exam</p>
+                    <p class="testimonial">"The discipline and structured approach at Master Mind Classes helped me prepare for NDA. I'm grateful for the supportive environment."</p>
+                </div>
+            </div>
+
+            <div class="achiever-card">
+                <div class="achiever-header">
+                    <div class="achiever-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23f59e0b' width='100' height='100'/%3E%3Ctext x='50%25' y='50%25' font-size='30' fill='white' text-anchor='middle' dy='.3em'%3EPG%3C/text%3E%3C/svg%3E" alt="Priyanshu Gupta">
+                    </div>
+                    <div class="achiever-info">
+                        <h3>Priyanshu Gupta</h3>
+                        <p class="achievement">PCM Topper</p>
+                    </div>
+                </div>
+                <div class="achiever-body">
+                    <p style="margin-bottom: 1rem; color: var(--accent-color); font-weight: 600;">District Topper of Jhansi in PCM (2026)</p>
+                    <p class="testimonial">"Rigorous curriculum, expert teachers, and weekly exams kept me on track. Master Mind Classes truly lives up to its promise."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FEES & TIMING SECTION ==================== -->
+    <section class="fees" id="fees">
+        <h2>Fees & Class Timings</h2>
+        <div class="fees-content">
+            <div>
+                <h3 style="font-family: 'Aleo', serif; color: var(--primary-color); margin-bottom: 1.5rem;">Fee Structure</h3>
+                <div class="fees-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Monthly Fee</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Class 9 & 10</strong></td>
+                                <td><strong>₹1,500</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Class 11 (Per Subject)</td>
+                                <td>₹700</td>
+                            </tr>
+                            <tr>
+                                <td>Class 12 (Per Subject)</td>
+                                <td>₹900</td>
+                            </tr>
+                            <tr style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color));">
+                                <td style="color: white;"><strong>Special Batches</strong></td>
+                                <td style="color: white;"><strong>Contact Us</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="timing-section">
+                <h3>Class Schedule</h3>
+                <div class="timing-grid">
+                    <div class="timing-item">
+                        <div>
+                            <strong>Class 9 & 11</strong>
+                            <p style="margin: 0;">Foundation & Advanced</p>
+                        </div>
+                        <span style="font-size: 16px;">2:00 PM - 4:00 PM</span>
+                    </div>
+                    <div class="timing-item">
+                        <div>
+                            <strong>Class 10 & 12</strong>
+                            <p style="margin: 0;">Board Preparation</p>
+                        </div>
+                        <span style="font-size: 16px;">4:00 PM - 6:00 PM</span>
+                    </div>
+                    <div style="background: white; color: var(--text-dark); padding: 1.5rem; border-radius: 12px; margin-top: 1rem;">
+                        <h4 style="color: var(--primary-color); margin-bottom: 1rem;">Available Batches</h4>
+                        <ul style="list-style: none; color: var(--text-light);">
+                            <li style="margin-bottom: 0.5rem;">✓ Regular Classes</li>
+                            <li style="margin-bottom: 0.5rem;">✓ Weekend Batches</li>
+                            <li style="margin-bottom: 0.5rem;">✓ Competitive Exam Coaching</li>
+                            <li>✓ Online Classes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT SECTION ==================== -->
+    <section class="contact" id="contact">
+        <h2>Contact & Location</h2>
+        <div class="contact-content">
+            <div class="contact-box">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Location</h3>
+                <p>
+                    Near Mission Compound<br>
+                    Jhansi, Uttar Pradesh<br>
+                    <strong>India</strong>
+                </p>
+            </div>
+
+            <div class="contact-box">
+                <i class="fas fa-phone"></i>
+                <h3>Phone</h3>
+                <p>
+                    <a href="tel:+918542000000">+91-85420-00000</a><br>
+                    Available Monday - Saturday<br>
+                    <small>10:00 AM - 7:00 PM</small>
+                </p>
+            </div>
+
+            <div class="contact-box">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p>
+                    <a href="mailto:suryanshbundela69@gmail.com">suryanshbundela69@gmail.com</a><br>
+                    Quick response guaranteed<br>
+                    <small>Within 24 hours</small>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CATEGORIES SECTION ==================== -->
+    <section class="categories">
+        <h2>Explore Our Programs</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-icon">👨‍🏫</div>
+                <h3>Our Team</h3>
+                <p>Meet our experienced faculty with proven track record of success and dedication to student achievement.</p>
+                <button class="category-btn" onclick="document.querySelector('#team').scrollIntoView()">View Team</button>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🏆</div>
+                <h3>Our Achievers</h3>
+                <p>Discover success stories of our brilliant students who have achieved remarkable academic milestones.</p>
+                <button class="category-btn" onclick="document.querySelector('#achievers').scrollIntoView()">View Achievers</button>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">📚</div>
+                <h3>Course Details</h3>
+                <p>Comprehensive courses for classes 9-12 and competitive exams like JEE, NEET, SSC, and more.</p>
+                <button class="category-btn" onclick="openModal('courses-modal')">View Courses</button>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">💰</div>
+                <h3>Fee Structure</h3>
+                <p>Transparent and affordable fee structure with flexible payment options and scholarship programs.</p>
+                <button class="category-btn" onclick="document.querySelector('#fees').scrollIntoView()">View Fees</button>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🎓</div>
+                <h3>Scholarships</h3>
+                <p>Merit-based scholarships for deserving students to support their academic journey.</p>
+                <button class="category-btn" onclick="openModal('scholarship-modal')">Apply Now</button>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">📍</div>
+                <h3>Find Us</h3>
+                <p>Visit our center near Mission Compound in Jhansi for campus tour and admission counseling.</p>
+                <button class="category-btn" onclick="document.querySelector('#contact').scrollIntoView()">Get Location</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== COURSES SECTION ==================== -->
+    <section class="courses">
+        <h2>Our Course Materials & Books</h2>
+        <div class="courses-grid">
+            <div class="course-card">
+                <div class="course-image">📄</div>
+                <div class="course-content">
+                    <h3>Sample Papers - CBSE 2026</h3>
+                    <p>Arihant Second-hand Sample Papers with complete solutions</p>
+                    <div class="course-price">₹300</div>
+                    <div class="course-action">
+                        <button class="btn-add-cart" onclick="alert('Added to cart')">Add Cart</button>
+                        <button class="btn-buy-now" onclick="alert('Proceeding to checkout')">Buy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-image">📖</div>
+                <div class="course-content">
+                    <h3>Accountancy - CBSE 2026</h3>
+                    <p>Second-hand comprehensive Accountancy textbook</p>
+                    <div class="course-price">₹250</div>
+                    <div class="course-action">
+                        <button class="btn-add-cart" onclick="alert('Added to cart')">Add Cart</button>
+                        <button class="btn-buy-now" onclick="alert('Proceeding to checkout')">Buy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-image">📚</div>
+                <div class="course-content">
+                    <h3>Business Studies - CBSE</h3>
+                    <p>Complete business studies reference guide</p>
+                    <div class="course-price">₹250</div>
+                    <div class="course-action">
+                        <button class="btn-add-cart" onclick="alert('Added to cart')">Add Cart</button>
+                        <button class="btn-buy-now" onclick="alert('Proceeding to checkout')">Buy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-image">📋</div>
+                <div class="course-content">
+                    <h3>Economics Guide - CBSE</h3>
+                    <p>Detailed economics notes and analysis</p>
+                    <div class="course-price">₹250</div>
+                    <div class="course-action">
+                        <button class="btn-add-cart" onclick="alert('Added to cart')">Add Cart</button>
+                        <button class="btn-buy-now" onclick="alert('Proceeding to checkout')">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; color: var(--text-light);">
+            <p><i class="fas fa-info-circle"></i> More study materials coming soon!</p>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS SECTION ==================== -->
+    <section class="testimonials">
+        <h2>What Our Students Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Master Mind Classes completely transformed my understanding of complex subjects. The teachers are incredibly supportive and the curriculum is comprehensive."</p>
+                <p class="testimonial-author">- Rishab Kumar, Class 12</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"I improved from average grades to district topper thanks to the structured teaching and regular assessments at Master Mind Classes."</p>
+                <p class="testimonial-author">- Priya Singh, Class 11</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"The online classes and doubt sessions are extremely helpful. I can learn at my own pace while getting expert guidance whenever needed."</p>
+                <p class="testimonial-author">- Arjun Verma, Class 10</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Great faculty, excellent study materials, and amazing support system. Master Mind Classes is definitely worth every penny!"</p>
+                <p class="testimonial-author">- Neha Joshi, Class 12</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"The competitive exam coaching here is world-class. I cleared JEE with a good score thanks to the rigorous preparation."</p>
+                <p class="testimonial-author">- Vikram Thakur, JEE Aspirant</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Best coaching center in Jhansi! Professional approach, caring teachers, and results that speak for themselves. Highly recommended!"</p>
+                <p class="testimonial-author">- Ananya Rawal, Class 9</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Master Mind</h4>
+                <p>Premier educational institution dedicated to building master minds for a better world. Established with a vision of academic excellence and holistic development.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#achievers">Achievers</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Programs</h4>
+                <ul>
+                    <li><a href="#fees">Class 9 & 10</a></li>
+                    <li><a href="#fees">Class 11 (Commerce & Science)</a></li>
+                    <li><a href="#fees">Class 12 (Commerce & Science)</a></li>
+                    <li><a href="#">Competitive Exams</a></li>
+                    <li><a href="#">Online Classes</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p><strong>Location:</strong><br>Near Mission Compound, Jhansi, UP</p>
+                <p><strong>Phone:</strong><br><a href="tel:+918542000000">+91-85420-00000</a></p>
+                <p><strong>Email:</strong><br><a href="mailto:suryanshbundela69@gmail.com">suryanshbundela69@gmail.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Master Mind Classes. All rights reserved. | Master Mind Builds Master of World</p>
+        </div>
+    </footer>
+
+    <!-- ==================== MODALS ==================== -->
+    <!-- Admission Modal -->
+    <div id="admission-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('admission-modal')">&times;</span>
+            <h2>Online Admission Form</h2>
+            <form onsubmit="submitAdmissionForm(event)">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="class">Select Class *</label>
+                    <select id="class" name="class" required>
+                        <option value="">-- Select Class --</option>
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="otp">OTP Verification</label>
+                    <button type="button" style="width: 100%; background: var(--light-blue); color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer;" onclick="alert('OTP will be sent to your registered email')">Send OTP</button>
+                </div>
+
+                <button type="submit" class="form-submit">Submit Application</button>
+            </form>
+            <p style="text-align: center; color: var(--text-light); margin-top: 1rem; font-size: 12px;">A confirmation email will be sent to the director</p>
+        </div>
+    </div>
+
+    <!-- Scholarship Modal -->
+    <div id="scholarship-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('scholarship-modal')">&times;</span>
+            <h2>Scholarship Exam Registration</h2>
+            <form onsubmit="submitScholarshipForm(event)">
+                <div class="form-group">
+                    <label for="scholar-name">Full Name *</label>
+                    <input type="text" id="scholar-name" name="scholar-name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="scholar-class">Class *</label>
+                    <select id="scholar-class" name="scholar-class" required>
+                        <option value="">-- Select Class --</option>
+                        <option value="10">Class 10 (Min. 85%)</option>
+                        <option value="12">Class 12 (Min. 90%)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="scholar-phone">Phone Number *</label>
+                    <input type="tel" id="scholar-phone" name="scholar-phone" required placeholder="Enter your phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="scholar-email">Email Address *</label>
+                    <input type="email" id="scholar-email" name="scholar-email" required placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="scholar-stream">Stream/Subject *</label>
+                    <select id="scholar-stream" name="scholar-stream" required>
+                        <option value="">-- Select Stream --</option>
+                        <option value="science">Science (PCM/PCB)</option>
+                        <option value="commerce">Commerce</option>
+                        <option value="arts">Arts</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="form-submit">Register for Exam</button>
+            </form>
+            <p style="text-align: center; color: var(--text-light); margin-top: 1rem; font-size: 12px;">Exam schedule will be sent via email</p>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // Navbar toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Scroll to top button
+        window.addEventListener('scroll', () => {
+            const scrollBtn = document.querySelector('.scroll-to-top');
+            if (window.pageYOffset > 300) {
+                scrollBtn.classList.add('active');
+            } else {
+                scrollBtn.classList.remove('active');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Modal functions
+        function openAdmissionModal() {
+            document.getElementById('admission-modal').classList.add('active');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Form submissions
+        function submitAdmissionForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            alert(`Thank you ${name}! Your application has been submitted. We will contact you shortly.`);
+            document.getElementById('admission-modal').classList.remove('active');
+            e.target.reset();
+        }
+
+        function submitScholarshipForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('scholar-name').value;
+            alert(`Thank you ${name}! Your scholarship exam registration is confirmed. Details will be sent to your email.`);
+            document.getElementById('scholarship-modal').classList.remove('active');
+            e.target.reset();
+        }
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const element = document.querySelector(href);
+                    if (element) {
+                        element.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.team-card, .achiever-card, .course-card, .category-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
